@@ -386,19 +386,19 @@ which effectively represents the running average value after the subtraction of 
 
 \subsection{From angles to fuel bow}
 
-Once the $\alpha^{real}_f$ are computed for $\forall f \in F$ we have to transform an angle value into frame a horizontal shift. For this purpose we use simple trigonometry:
+Once the $\alpha^{real}_f$ are computed for $\forall f \in F$ we have to transform an angle value into a frame horizontal shift. For this purpose, we use simple trigonometry:
 $$
 cos(\alpha_f^{real}) = \frac{\Delta x}{h_f},
 $$
-where $\alpha_f^{real}$ is frame real angle, $\Delta x$ is horizontal frame shift and $h_f$ is an effective frame height. The effective frame height depends on camera speed and camera frame rate and corresponds to number of vertical pixels by which are shifted two consecutive video frames.
+where $\alpha_f^{real}$ is frame real angle, $\Delta x$ is horizontal frame shift and $h_f$ is an effective frame height. The effective frame height depends on camera speed and frame rate and corresponds to number of vertical pixels by which two consecutive video frames are shifted.
 
-Because this step acummulates the error across the video sequence, we recommend to add a procedure for double verification of computed values. The horizontal shift can be estimated also a different way. In our calibration method we use a computation of $\Delta x$ directly from image data. This is done by convolution which minimizes this term:
+Because this step acummulates the error across the video sequence, we recommend to add a procedure for double verification of computed values. The horizontal shift can also be estimated by another way. In our calibration method, we use a computation of $\Delta x$ directly from image data by minimization of this  convolution term:
 
 $$
 min_{\Delta x} -\sum_{x=0}^{W-1}I_{f_1}(x, H-1) * I_{f_2}(x + \Delta x, 0)
 $$
 
-Where $I_{f_1}$ and $I_{f_2}$ are intensities of pixels in frames $f_1$ and $f_2$ and $W$, $H$ denotes width and height of the video frames. In other words, we try to find out best position of bottom row of $f_1$ and top row of $f_2$. For this minimization we took frames for which bottom and top rows corresponds (i.e. their distance in video sequence is e.g. 60 frames - according to the camera speed).
+Where $I_{f_1}$ and $I_{f_2}$ are intensities of pixels in frames $f_1$ and $f_2$ and $W$, $H$ denotes width and height of the video frames. In other words, we try to findout best position of bottom row of $f_1$ and top row of $f_2$. For this minimization we took frames for which bottom and top rows corresponds (i.e., their distance in video sequence is (e.g.) 60 frames - according to the camera speed).
 
 Once both computational ways generate results close to each other parame\-trization for real usage is established.
 
